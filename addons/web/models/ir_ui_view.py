@@ -8,16 +8,24 @@ class View(models.Model):
 
     def get_view_info(self):
         _view_info = self._get_view_info()
-        return {
-            type_: {
-                'display_name': display_name,
-                'icon': _view_info[type_]['icon'],
-                'multi_record': _view_info[type_].get('multi_record', True),
-            }
-            for (type_, display_name)
-            in self.fields_get(['type'], ['selection'])['type']['selection']
-            if type_ != 'qweb'
-        }
+        result = {}
+        for (type_, display_name) in self.fields_get(['type'], ['selection'])['type']['selection']:
+            if type_ == 'qweb':
+                continue
+            if type_ in _view_info:
+                result[type_] = {
+                    'display_name': display_name,
+                    'icon': _view_info[type_]['icon'],
+                    'multi_record': _view_info[type_].get('multi_record', True),
+                }
+            else:
+                # Provide default values for unknown view types
+                result[type_] = {
+                    'display_name': display_name,
+                    'icon': 'fa fa-eye',  # Default icon
+                    'multi_record': True,  # Default to multi-record
+                }
+        return result
 
     def _get_view_info(self):
         return {
