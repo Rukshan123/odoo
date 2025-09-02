@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit PDC Payment Form View to add cheque_book_id field -->
+    <record id="sh_pdc_payment_form_view_inherit" model="ir.ui.view">
+        <field name="name">sh.pdc.wizard.form.inherit</field>
+        <field name="model">pdc.wizard</field>
+        <field name="inherit_id" ref="sh_pdc.sh_pdc_payment_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="cheque_book_id" string="Cheque Book"
+                       options="{'no_create': True, 'no_open': True}"
+                       context="{'default_journal_id': journal_id}"
+                       readonly="state not in ['draft','bounced','returned']"
+                       invisible="payment_type != 'send_money'"/>
+                <field name="auto_assign_cheque" string="Auto Assign Cheque Number"
+                       readonly="state not in ['draft','bounced','returned']"
+                       invisible="True"/>
+            </xpath>
+        </field>
+    </record>
+</odoo> 

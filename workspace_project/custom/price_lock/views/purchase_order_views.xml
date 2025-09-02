@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit purchase order form view to make price_unit readonly when manually set -->
+        <record id="purchase_order_form_inherit_price_lock" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.price.lock</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='order_line']/list//field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('price_manually_set', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('price_manually_set', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

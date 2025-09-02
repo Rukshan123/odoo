@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit account move form view to make price_unit readonly when manually set -->
+        <record id="account_move_form_inherit_price_lock" model="ir.ui.view">
+            <field name="name">account.move.form.inherit.price.lock</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='invoice_line_ids']/list//field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('price_manually_set', '=', True)]}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='invoice_line_ids']/form//field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('price_manually_set', '=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

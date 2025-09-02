@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_account_asset_form_inherit_combined" model="ir.ui.view">
+        <field name="name">account.asset.form.inherit.combined</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="asset_number" invisible="state == 'model'"/>
+                <field name="short_code" placeholder="e.g. BG, FF, MV, OE, PM" required="1" widget="char" invisible="state != 'model'"/>
+            </field>
+            <xpath expr="//sheet/group[1]" position="inside">
+                <group string="Invoice Information" invisible="invoice_id == False">
+                    <field name="invoice_id" readonly="1"/>
+                    <field name="invoice_line_id" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Asset Model Tree View -->
+    <record id="view_account_asset_model_tree_inherit_combined" model="ir.ui.view">
+        <field name="name">account.asset.model.list.inherit.combined</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_model_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="short_code" string="Short Code" widget="badge" decoration-info="1"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Asset Tree View -->
+    <record id="view_account_asset_tree_inherit_combined" model="ir.ui.view">
+        <field name="name">account.asset.list.inherit.combined</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="asset_number" readonly="1"/>
+            </field>
+            <field name="acquisition_date" position="after">
+                <field name="invoice_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Search View (Combined) -->
+    <record id="view_account_asset_search_inherit_combined" model="ir.ui.view">
+        <field name="name">account.asset.search.inherit.combined</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="short_code" string="Short Code"/>
+                <field name="asset_number"/>
+            </field>
+            <field name="acquisition_date" position="after">
+                <field name="invoice_id"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Asset Model Search View -->
+    <record id="view_account_asset_model_search_inherit_combined" model="ir.ui.view">
+        <field name="name">account.asset.model.search.inherit.combined</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_model_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="short_code" string="Short Code"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Asset Maintenance Link Wizard Form View -->
+        <record id="view_asset_maintenance_link_wizard_form" model="ir.ui.view">
+            <field name="name">asset.maintenance.link.wizard.form</field>
+            <field name="model">asset.maintenance.link.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Link Asset with Equipment">
+                    <group>
+                        <group>
+                            <field name="equipment_id"/>
+                        </group>
+                        <group>
+                            <field name="asset_id"/>
+                        </group>
+                    </group>
+
+                    <group string="Asset Information" invisible="not asset_id">
+                        <group>
+                            <field name="asset_name"/>
+                            <field name="serial_number"/>
+                        </group>
+                        <group>
+                            <field name="asset_value"/>
+                            <field name="currency_id"/>
+                        </group>
+                    </group>
+
+                    <footer>
+                        <button name="action_link" string="Link" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

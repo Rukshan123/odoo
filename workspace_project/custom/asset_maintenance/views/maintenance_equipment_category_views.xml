@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Maintenance Equipment Category Form View -->
+        <record id="view_maintenance_equipment_category_form_inherit_asset" model="ir.ui.view">
+            <field name="name">maintenance.equipment.category.form.inherit.asset</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add asset model field after name -->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="asset_model_id"/>
+                    <field name="asset_model_name" readonly="1"/>
+                </xpath>
+
+                <!-- Add linked assets count after the main group -->
+                <xpath expr="//group" position="after">
+                    <group string="Asset Information">
+                        <field name="linked_assets_count"/>
+                        <button name="action_view_linked_assets"
+                                type="object"
+                                string="View Linked Assets"
+                                class="btn-primary"
+                                invisible="linked_assets_count == 0"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Maintenance Equipment Category Tree View -->
+        <record id="view_maintenance_equipment_category_tree_inherit_asset" model="ir.ui.view">
+            <field name="name">maintenance.equipment.category.tree.inherit.asset</field>
+            <field name="model">maintenance.equipment.category</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_category_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="asset_model_name"/>
+                    <field name="linked_assets_count"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

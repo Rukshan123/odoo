@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_cheque_book">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="sh_pdc_cheque_management.report_cheque_book_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_cheque_book_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Cheque Book Report</h2>
+                
+                <div class="row mt32 mb32">
+                    <div class="col-6">
+                        <strong>Cheque Book:</strong> <span t-field="o.name"/>
+                        <br/>
+                        <strong>Bank Account:</strong> <span t-field="o.bank_account_id"/>
+                        <br/>
+                        <strong>Journal:</strong> <span t-field="o.journal_id"/>
+                    </div>
+                    <div class="col-6">
+                        <strong>First Cheque No:</strong> <span t-field="o.first_cheque_no"/>
+                        <br/>
+                        <strong>Last Cheque No:</strong> <span t-field="o.last_cheque_no"/>
+                        <br/>
+                        <strong>Current Cheque No:</strong> <span t-field="o.current_cheque_no"/>
+                    </div>
+                </div>
+
+                <div class="row mt32 mb32">
+                    <div class="col-12">
+                        <strong>Summary:</strong>
+                        <ul>
+                            <li>Total Cheques: <span t-field="o.total_cheques"/></li>
+                            <li>Used Cheques: <span t-field="o.used_cheques"/></li>
+                            <li>Available Cheques: <span t-field="o.available_cheques"/></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row mt32 mb32">
+                    <div class="col-12">
+                        <h4>Used Cheque Numbers</h4>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Cheque Number</th>
+                                    <th>PDC Payment</th>
+                                    <th>Partner</th>
+                                    <th>Amount</th>
+                                    <th>Used Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.used_cheque_numbers" t-as="used">
+                                    <td><span t-field="used.cheque_number"/></td>
+                                    <td><span t-field="used.pdc_id"/></td>
+                                    <td><span t-field="used.partner_id"/></td>
+                                    <td><span t-field="used.payment_amount"/></td>
+                                    <td><span t-field="used.used_date"/></td>
+                                    <td><span t-field="used.state"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_cheque_book" model="ir.actions.report">
+        <field name="name">Cheque Book Report</field>
+        <field name="model">cheque.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hy_cheque_book_management.report_cheque_book</field>
+        <field name="report_file">hy_cheque_book_management.report_cheque_book</field>
+        <field name="binding_model_id" ref="model_cheque_book"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo> 

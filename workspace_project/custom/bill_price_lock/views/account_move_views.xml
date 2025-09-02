@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_inherit_bill_price_lock" model="ir.ui.view">
+        <field name="name">account.move.inherit.bill.price.lock</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='invoice_line_ids']/list/field[@name='price_unit']" position="attributes">
+                <attribute name="readonly">purchase_line_id or parent.purchase_vendor_bill_id</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='invoice_line_ids']/form/sheet/group/field[@name='price_unit']" position="attributes">
+                <attribute name="readonly">purchase_line_id or parent.purchase_vendor_bill_id</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo> 

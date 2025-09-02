@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action for generating short codes -->
+        <record id="action_generate_short_codes" model="ir.actions.server">
+            <field name="name">Generate Short Codes</field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                    records.generate_short_codes()
+            </field>
+        </record>
+
+        <!-- Create custom parent menu -->
+        <menuitem
+            id="menu_asset_management"
+            name="Asset Management"
+            parent="account.menu_finance"
+            sequence="50"/>
+
+        <!-- Menu item with custom parent -->
+        <menuitem
+            id="menu_generate_short_codes"
+            name="Generate Short Codes"
+            parent="menu_asset_management"
+            action="action_generate_short_codes"
+            sequence="100"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_form_inherited" model="ir.ui.view">
+        <field name="name">account.voucher.formate.form.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account_check_printing.view_account_payment_form_inherited"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='print_checks']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

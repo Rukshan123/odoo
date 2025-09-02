@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_asset_form_inherit_maintenance" model="ir.ui.view">
+            <field name="name">account.asset.form.inherit.maintenance</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <!-- Add serial number  -->
+                <xpath expr="//field[@name='acquisition_date']" position="after">
+                    <field name="serial_number"/>
+                    <field name="warranty_expiration_date"/>
+                </xpath>
+
+                <!-- Add maintenance equipment section -->
+                <xpath expr="//page[@name='related_items']" position="after">
+                    <page string="Maintenance Equipment" name="maintenance_equipment">
+                        <group>
+                            <group>
+                                <field name="has_maintenance_equipment"/>
+                                <field name="maintenance_equipment_id" invisible="not has_maintenance_equipment"/>
+                            </group>
+                            <group>
+                                <field name="maintenance_equipment_id"
+                                       widget="many2one"
+                                       options="{'no_create': True}"
+                                       invisible="has_maintenance_equipment"/>
+                            </group>
+                        </group>
+
+                        <group invisible="not has_maintenance_equipment">
+                            <button name="action_view_maintenance_equipment"
+                                    type="object"
+                                    string="View Equipment"
+                                    class="btn-primary"/>
+                        </group>
+
+                        <group invisible="has_maintenance_equipment">
+                            <button name="action_create_maintenance_equipment"
+                                    type="object"
+                                    string="Create Maintenance Equipment"
+                                    class="btn-primary"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_account_asset_tree_inherit_maintenance" model="ir.ui.view">
+            <field name="name">account.asset.tree.inherit.maintenance</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="serial_number"/>
+                    <field name="warranty_expiration_date"/>
+                    <field name="has_maintenance_equipment"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Asset Search View -->
+        <record id="view_account_asset_search_inherit_maintenance" model="ir.ui.view">
+            <field name="name">account.asset.search.inherit.maintenance</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="serial_number"/>
+                    <field name="warranty_expiration_date"/>
+                </xpath>
+
+                <xpath expr="//filter[@name='current']" position="after">
+                    <filter string="With Maintenance Equipment" name="with_maintenance_equipment"
+                            domain="[('has_maintenance_equipment', '=', True)]"/>
+                    <filter string="Without Maintenance Equipment" name="without_maintenance_equipment"
+                            domain="[('has_maintenance_equipment', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

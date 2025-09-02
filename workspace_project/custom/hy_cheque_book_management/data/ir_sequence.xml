@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Sequence for Cheque Books -->
+    <record id="sequence_cheque_book" model="ir.sequence">
+        <field name="name">Cheque Book Sequence</field>
+        <field name="code">cheque.book</field>
+        <field name="prefix">CB/</field>
+        <field eval="1" name="number_next" />
+        <field eval="3" name="padding" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+    </record>
+</odoo> 

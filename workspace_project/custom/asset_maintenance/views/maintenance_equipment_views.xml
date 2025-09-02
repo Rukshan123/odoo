@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Maintenance Equipment Form View -->
+        <record id="view_maintenance_equipment_form_inherit_asset" model="ir.ui.view">
+            <field name="name">maintenance.equipment.form.inherit.asset</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+            <field name="arch" type="xml">
+                <!-- Add asset section after the main group -->
+                <xpath expr="//group" position="after">
+                    <group string="Linked Asset" name="linked_asset">
+                        <group>
+                            <field name="has_linked_asset"/>
+                            <field name="asset_id"
+                                   invisible="not has_linked_asset"/>
+                        </group>
+                        <group>
+                            <field name="asset_id"
+                                   widget="many2one"
+                                   options="{'no_create': True}"
+                                   invisible="has_linked_asset"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <!-- Add asset information in product information tab -->
+                <xpath expr="//page[@name='product_information']//group" position="inside">
+                    <group string="Asset Information" invisible="not has_linked_asset">
+                        <field name="asset_name" readonly="1"/>
+                        <field name="asset_code" readonly="1" string="Asset ID"/>
+                    </group>
+                </xpath>
+
+                <!-- Add action buttons to button box -->
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_linked_asset"
+                            type="object"
+                            string="View Asset"
+                            class="oe_stat_button"
+                            icon="fa-building"
+                            invisible="not has_linked_asset"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Maintenance Equipment  View -->
+        <record id="view_maintenance_equipment_tree_inherit_asset" model="ir.ui.view">
+            <field name="name">maintenance.equipment.tree.inherit.asset</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="has_linked_asset"/>
+                    <field name="asset_name"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Maintenance Equipment Search View -->
+        <record id="view_maintenance_equipment_search_inherit_asset" model="ir.ui.view">
+            <field name="name">maintenance.equipment.search.inherit.asset</field>
+            <field name="model">maintenance.equipment</field>
+            <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="asset_name"/>
+                </xpath>
+
+                <xpath expr="//filter[@name='category']" position="after">
+                    <filter string="With Linked Asset" name="with_linked_asset"
+                            domain="[('has_linked_asset', '=', True)]"/>
+                    <filter string="Without Linked Asset" name="without_linked_asset"
+                            domain="[('has_linked_asset', '=', False)]"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

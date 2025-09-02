@@ -1,0 +1,3 @@
+id,name,model_id:id,domain_force,groups,perm_read,perm_write,perm_create,perm_unlink
+rule_cheque_book_company,Cheque Book Multi-Company Rule,model_cheque_book,"[('company_id', '=', company_id)]",,1,1,1,1
+rule_cheque_number_used_company,Cheque Number Used Multi-Company Rule,model_cheque_number_used,"[('cheque_book_id.company_id', '=', company_id)]",,1,1,1,1

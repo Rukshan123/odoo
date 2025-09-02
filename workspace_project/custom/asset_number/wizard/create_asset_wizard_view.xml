@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_create_asset_wizard_form" model="ir.ui.view">
+        <field name="name">create.asset.wizard.form</field>
+        <field name="model">create.asset.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Assets from Invoice Line">
+                <sheet>
+                    <group>
+                        <group string="Invoice Line Information">
+                            <field name="invoice_line_id"/>
+                            <field name="product_id"/>
+                            <field name="product_name"/>
+                        </group>
+                        <group string="Asset Creation Details">
+                            <field name="quantity"/>
+                            <field name="unit_price"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_create_assets" 
+                            string="Create Assets" 
+                            type="object" 
+                            class="btn-primary"
+                            invisible="quantity &lt;= 0"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_asset_wizard" model="ir.actions.act_window">
+        <field name="name">Create Assets</field>
+        <field name="res_model">create.asset.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_invoice_line_id': active_id}</field>
+    </record>
+</odoo> 
