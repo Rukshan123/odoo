@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="signature_block">
+        <div class="mt-5 pt-4" style="margin-top: 520px;">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <div style="border-top: 1px solid #555; height: 1px; margin: 36px 40px 6px 40px;"/>
+                    <small style="color:#000;">Issued by</small>
+                </div>
+                <div class="col-6 text-center">
+                    <div style="border-top: 1px solid #555; height: 1px; margin: 36px 40px 6px 40px;"/>
+                    <small style="color:#000;">Received by</small>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="external_layout_standard_inherit" inherit_id="web.external_layout_standard" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_standard')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+
+    <template id="external_layout_boxed_inherit" inherit_id="web.external_layout_boxed" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_boxed')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+
+    <template id="external_layout_bold_inherit" inherit_id="web.external_layout_bold" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_bold')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+    <!-- Inject in external layout: striped -->
+    <template id="external_layout_striped_inherit" inherit_id="web.external_layout_striped" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_striped')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+
+    <template id="external_layout_folder_inherit" inherit_id="web.external_layout_folder" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_folder')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+
+    <template id="external_layout_wave_inherit" inherit_id="web.external_layout_wave" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_wave')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+
+
+    <template id="external_layout_bubble_inherit" inherit_id="web.external_layout_bubble" priority="50">
+        <xpath expr="//*[contains(@t-attf-class,'o_report_layout_bubble')]//t[@t-out='0']" position="after">
+            <t t-if="o and o._name == 'stock.picking' and o.picking_type_id and o.picking_type_id.code == 'internal' and o.picking_type_id.warehouse_id and ('subcontracting_resupply_type_id' in o.picking_type_id.warehouse_id._fields) and o.picking_type_id.id == o.picking_type_id.warehouse_id.subcontracting_resupply_type_id.id" t-call="sozo_report_extend.signature_block"/>
+        </xpath>
+    </template>
+</odoo>
+
+

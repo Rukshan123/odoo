@@ -3143,7 +3143,7 @@ msgstr "Poista kaikki esikatselut"
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/message.xml:0
 msgid "Deleted document"
-msgstr ""
+msgstr "Poistettu dokumentti"
 
 #. module: mail
 #. odoo-javascript

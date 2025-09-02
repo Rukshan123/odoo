@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sozo_report_footer_block">
+        <div class="sozo-footer" style="margin-top:0px;">
+            <div class="row" style="align-items:center;">
+                <div class="col-12" style="text-align:center; width:100%;">
+                    <img t-att-src="'/sozo_report_extend/static/src/img/clouds_logo.png'" style="height:120px; object-fit:contain; display:inline-block; vertical-align:middle; margin:0 35px;"/>
+                    <img t-att-src="'/sozo_report_extend/static/src/img/pine_logo.png'" style="height:120px; object-fit:contain; display:inline-block; vertical-align:middle; margin:0 35px;"/>
+                    <img t-att-src="'/sozo_report_extend/static/src/img/sozo_logo.png'" style="height:120px; object-fit:contain; display:inline-block; vertical-align:middle; margin:0 35px;"/>
+                </div>
+            </div>
+            <div class="row" style="margin-top:-6px;">
+                <div class="col-12" style="font-size:16px; color:#000; text-align:center;">
+                    Hotline Number: 0741839191  Email: info@sozoiced.com  https://sozoiced.com
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="external_layout_standard_footer" inherit_id="web.external_layout_standard" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_boxed_footer" inherit_id="web.external_layout_boxed" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_bold_footer" inherit_id="web.external_layout_bold" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_striped_footer" inherit_id="web.external_layout_striped" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_folder_footer" inherit_id="web.external_layout_folder" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_wave_footer" inherit_id="web.external_layout_wave" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+    <template id="external_layout_bubble_footer" inherit_id="web.external_layout_bubble" priority="60">
+        <xpath expr="//*[(contains(@class,'o_footer_content') or contains(@t-attf-class,'o_footer_content'))]" position="before">
+            <t t-call="sozo_report_extend.sozo_report_footer_block"/>
+        </xpath>
+    </template>
+
+</odoo>
+
+

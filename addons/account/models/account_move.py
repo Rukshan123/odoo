@@ -4414,6 +4414,13 @@ class AccountMove(models.Model):
         else:
             cash_discount_account = company.account_journal_early_pay_discount_gain_account_id
 
+        epd_analytic_distribution = self.env['account.analytic.distribution.model']._get_distribution({
+            'account_prefix': cash_discount_account.code,
+            'company_id': self.company_id.id,
+            'partner_id': self.commercial_partner_id.id,
+            'partner_category_id': self.partner_id.category_id.ids,
+        })
+
         bases_details = {}
 
         term_amount_currency = payment_term_line.amount_currency - payment_term_line.discount_amount_currency
@@ -4432,7 +4439,7 @@ class AccountMove(models.Model):
                     'partner_id': base_line['partner_id'].id,
                     'currency_id': base_line['currency_id'].id,
                     'account_id': cash_discount_account.id,
-                    'analytic_distribution': base_line['analytic_distribution'],
+                    'analytic_distribution': base_line['analytic_distribution'] or epd_analytic_distribution,
                 }
                 base_detail = resulting_delta_base_details.setdefault(frozendict(grouping_dict), {
                     'balance': 0.0,
@@ -4511,6 +4518,7 @@ class AccountMove(models.Model):
                 'currency_id': payment_term_line.currency_id.id,
                 'amount_currency': term_amount_currency,
                 'balance': term_balance,
+                'analytic_distribution': epd_analytic_distribution,
             }
 
         return res
@@ -6190,7 +6198,7 @@ class AccountMove(models.Model):
             force_email_company=force_email_company, force_email_lang=force_email_lang
         )
         record = render_context['record']
-        subtitles = [f"{record.name} - {record.partner_id.name}" if record.partner_id else record.name]
+        subtitles = [f"{record.name} - {record.partner_id.name}" if record.partner_id.name else record.name]
         if self.is_invoice(include_receipts=True):
             # Only show the amount in emails for non-miscellaneous moves. It might confuse recipients otherwise.
             if self.invoice_date_due and self.payment_state not in ('in_payment', 'paid'):
